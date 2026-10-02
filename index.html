@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanna Feel Loved Today?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fbcfe8 0%, #ffe4e6 50%, #f43f5e 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .btn-3d {
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 20px -4px rgba(190, 18, 60, 0.3);
+        }
+        .btn-3d:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px -4px rgba(190, 18, 60, 0.4);
+        }
+        .btn-3d:active {
+            transform: translateY(1px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body.editing-active .editable {
+            outline: 2px dashed #f43f5e !important;
+            outline-offset: 3px;
+            background-color: rgba(255, 228, 230, 0.5);
+            border-radius: 6px;
+            cursor: text;
+        }
+        body.editing-active .editable:hover {
+            background-color: rgba(254, 205, 211, 0.8);
+        }
+        body.editing-active .change-photo-btn {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body class="p-4 relative min-h-screen flex flex-col justify-between items-center">
+
+    <div class="w-full max-w-md mx-auto mb-4 flex justify-between items-center z-20">
+        <div class="text-rose-900 font-bold text-sm flex items-center gap-1.5 bg-white/70 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm">
+            <span>💖 Love Note</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <button id="editBtn" onclick="toggleEditMode()" class="hover:bg-rose-50 font-semibold text-xs px-3.5 py-1.5 rounded-full shadow-md border border-rose-200 transition-all flex items-center gap-1.5 active:scale-95 bg-rose-600 text-white" type="button">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span id="editBtnText">Edit</span>
+            </button>
+            <button onclick="copyShareLink()" class="bg-white hover:bg-rose-50 text-rose-600 font-semibold text-xs px-3.5 py-1.5 rounded-full shadow-md border border-rose-200 transition-all flex items-center gap-1.5 active:scale-95" type="button">
+                <i class="fa-solid fa-link"></i>
+                <span id="shareBtnText">Copy Share Link</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Container Card -->
+    <div class="w-full max-w-md mx-auto relative z-10 my-auto">
+
+        <!-- Page 1 -->
+        <div id="page1" class="page active bg-[#fff5f6] rounded-[2.5rem] p-8 shadow-2xl border-4 border-pink-100 text-center relative overflow-hidden">
+            <div class="inline-block bg-pink-100 text-pink-700 font-semibold px-4 py-1.5 rounded-full text-xs tracking-wide uppercase mb-6 shadow-sm">
+                ♥ JUST FOR YOU
+            </div>
+            
+            <h1 id="p1-title" class="editable serif-font text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4" contenteditable="false">
+                Wanna feel<br><span class="italic text-rose-700">loved today?</span>
+            </h1>
+            
+            <p id="p1-desc" class="editable text-gray-600 text-sm mb-8 leading-relaxed px-4" contenteditable="false">
+                There is only one right answer and you have two chances to choose it.
+            </p>
+
+            <div class="space-y-4 mb-8">
+                <button onclick="goToPage(2)" class="btn-3d w-full py-4 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-2xl text-lg tracking-wide cursor-pointer" type="button">
+                    Yes
+                </button>
+                <button onclick="goToPage(2)" class="btn-3d w-full py-4 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-2xl text-lg tracking-wide cursor-pointer" type="button">
+                    Yes
+                </button>
+            </div>
+
+            <p id="p1-footer" class="editable text-xs text-rose-800 font-medium flex items-center justify-center gap-1.5" contenteditable="false">
+                ✨ A little love is on its way
+            </p>
+        </div>
+
+        <!-- Page 2 -->
+        <div id="page2" class="page bg-gray-950 rounded-[2.5rem] p-8 shadow-2xl border-4 border-gray-800 text-center relative overflow-hidden">
+            <div class="inline-block bg-rose-950/80 text-rose-300 font-semibold px-4 py-1.5 rounded-full text-xs tracking-wide uppercase mb-6 border border-rose-800/50">
+                ♥ JUST FOR YOU
+            </div>
+
+            <h1 id="p2-title" class="editable serif-font text-3xl md:text-4xl font-bold text-white leading-tight mb-3" contenteditable="false">
+                Please accept<br>the gift
+            </h1>
+
+            <p id="p2-desc" class="editable text-gray-400 text-sm mb-8" contenteditable="false">
+                A little surprise is waiting for you
+            </p>
+
+            <div class="flex gap-4 mb-8 relative min-h-[56px] justify-center items-center">
+                <button onclick="goToPage(3)" class="btn-3d flex-1 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-2xl text-base cursor-pointer" type="button">
+                    Yes
+                </button>
+                <button onclick="goToPage(4)" class="btn-3d flex-1 py-3.5 bg-rose-900/60 hover:bg-rose-900 text-rose-200 font-semibold rounded-2xl text-base border border-rose-700/40 cursor-pointer" type="button">
+                    No
+                </button>
+            </div>
+
+            <p id="p2-footer" class="editable text-xs text-gray-500 font-medium flex items-center justify-center gap-1.5" contenteditable="false">
+                ✨ Your answer unlocks the next little surprise
+            </p>
+        </div>
+
+        <!-- Page 3 -->
+        <div id="page3" class="page bg-[#fff5f6] rounded-[2.5rem] p-8 shadow-2xl border-4 border-pink-100 text-center relative">
+            <h1 id="p3-title" class="editable serif-font text-3xl font-bold text-gray-900 mb-2" contenteditable="false">
+                Pick your little gift
+            </h1>
+            <p id="p3-desc" class="editable text-gray-600 text-xs mb-8" contenteditable="false">
+                Choose the sticker that feels most like you.
+            </p>
+
+            <div class="grid grid-cols-3 gap-3 mb-8">
+                <div onclick="goToPage(5)" class="cursor-pointer bg-white p-4 rounded-2xl border-2 border-pink-100 hover:border-rose-400 shadow-sm transition-all hover:scale-105 flex items-center justify-center aspect-square">
+                    <span class="text-4xl">💌</span>
+                </div>
+                <div onclick="goToPage(5)" class="cursor-pointer bg-white/60 p-4 rounded-2xl border-2 border-dashed border-pink-200 hover:border-rose-400 flex items-center justify-center aspect-square">
+                    <span class="text-3xl opacity-40">✨</span>
+                </div>
+                <div onclick="goToPage(5)" class="cursor-pointer bg-white/60 p-4 rounded-2xl border-2 border-dashed border-pink-200 hover:border-rose-400 flex items-center justify-center aspect-square">
+                    <span class="text-3xl opacity-40">🎁</span>
+                </div>
+            </div>
+
+            <p id="p3-footer" class="editable text-xs text-rose-800 font-medium flex items-center justify-center gap-1.5" contenteditable="false">
+                ✨ Your answer unlocks the next little surprise
+            </p>
+        </div>
+
+        <!-- Page 4 -->
+        <div id="page4" class="page bg-white rounded-[2.5rem] p-8 shadow-2xl border-4 border-rose-200 text-center relative">
+            <h2 id="p4-title" class="editable serif-font text-2xl font-bold text-rose-900 mb-4" contenteditable="false">
+                Wrong answer! 😤
+            </h2>
+
+            <div class="w-48 h-48 mx-auto mb-6 relative flex items-center justify-center">
+                <img src="https://i.ibb.co/N60qzzCG/IMG-1024.jpg" alt="Wrong Answer Sticker" class="w-full h-full object-contain rounded-xl">
+            </div>
+
+            <p id="p4-desc" class="editable text-gray-600 text-sm mb-6" contenteditable="false">
+                You weren't supposed to say No! Try again right now 💕
+            </p>
+
+            <button onclick="goToPage(2)" class="btn-3d w-full py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl text-lg shadow-lg cursor-pointer" type="button">
+                Try Again 🥺💕
+            </button>
+        </div>
+
+        <!-- Page 5 -->
+        <div id="page5" class="page bg-[#fff1f2] rounded-[2.5rem] p-6 shadow-2xl border-4 border-pink-200 relative max-h-[85vh] overflow-y-auto">
+            
+            <div id="p5-note" class="editable text-left mb-6 bg-white/80 backdrop-blur-sm p-5 rounded-2xl border border-pink-100 shadow-sm" contenteditable="false">
+                <p class="text-gray-800 text-sm leading-relaxed mb-3">
+                    Hey baby, just wanted to say thank you for always having my back. You’re my safe space and my favorite human to count on 🥹
+                </p>
+                <p class="text-gray-800 text-sm leading-relaxed mb-3">
+                    Goa was fun, but I missed you like crazy the entire time! Every single place I went, I kept thinking about how much better it’d be with you there.
+                </p>
+                <p class="text-gray-800 text-sm leading-relaxed mb-3">
+                    That’s why I get super annoyed whenever you go quiet on me haha, I just want your attention! 😤💖
+                </p>
+                <p class="text-gray-900 text-sm font-semibold leading-relaxed">
+                    You’re my cute little baby and I love you veryy muchhh🐻
+                </p>
+            </div>
+
+            <!-- Carousel -->
+            <div class="relative mb-4">
+                <div id="carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar">
+                    <div class="snap-center shrink-0 w-full bg-white p-3 rounded-2xl shadow-md border border-pink-100">
+                        <div class="h-64 rounded-xl overflow-hidden bg-pink-50 mb-3 flex items-center justify-center relative">
+                            <img src="https://i.ibb.co/0pR0nT8L/IMG-1050.jpg" alt="Our Photo" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="carousel-dots" class="flex justify-center gap-1.5 mb-6">
+                <span class="w-2 h-2 rounded-full bg-rose-600 transition-all"></span>
+            </div>
+
+            <p id="p5-footer" class="editable text-xs text-rose-800 font-medium text-center" contenteditable="false">
+                ✨ Forever &amp; Always
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Script Section -->
+    <script>
+        function goToPage(pageNumber) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+
+            const targetPage = document.getElementById('page' + pageNumber);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        let isEditing = false;
+        function toggleEditMode() {
+            isEditing = !isEditing;
+            const body = document.body;
+            const editBtn = document.getElementById('editBtn');
+            const editBtnText = document.getElementById('editBtnText');
+            const editables = document.querySelectorAll('.editable');
+
+            if (isEditing) {
+                body.classList.add('editing-active');
+                editBtn.classList.remove('bg-rose-600', 'text-white');
+                editBtn.classList.add('bg-gray-800', 'text-white');
+                editBtnText.innerText = 'Done Editing';
+                editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+            } else {
+                body.classList.remove('editing-active');
+                editBtn.classList.remove('bg-gray-800', 'text-white');
+                editBtn.classList.add('bg-rose-600', 'text-white');
+                editBtnText.innerText = 'Edit';
+                editables.forEach(el => el.setAttribute('contenteditable', 'false'));
+            }
+        }
+
+        function copyShareLink() {
+            const shareBtnText = document.getElementById('shareBtnText');
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const originalText = shareBtnText.innerText;
+                shareBtnText.innerText = 'Copied!';
+                setTimeout(() => {
+                    shareBtnText.innerText = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
